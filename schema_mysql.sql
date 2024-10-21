@@ -1,0 +1,29 @@
+CREATE TABLE `nodes` (
+ id VARCHAR(64) NOT NULL, 
+ name TEXT NOT NULL, 
+ hostname TEXT NOT NULL, 
+ port INT UNSIGNED NOT NULL DEFAULT 6969, 
+ `ssl` INT UNSIGNED NOT NULL, 
+ cache INT UNSIGNED NOT NULL, 
+ PRIMARY KEY (`id`),
+ KEY `ssl` (`ssl`),
+ KEY `cache` (`cache`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `node_polling` (
+ id VARCHAR(64) NOT NULL, 
+ utcTimestamp BIGINT UNSIGNED NOT NULL, 
+ status INT UNSIGNED NOT NULL DEFAULT 0, 
+ feeAddress TEXT NOT NULL, 
+ feeAmount BIGINT UNSIGNED NULL, 
+ height INT UNSIGNED NOT NULL DEFAULT 0, 
+ version TEXT NOT NULL, 
+ connectionsIn INT UNSIGNED NOT NULL DEFAULT 0, 
+ connectionsOut INT UNSIGNED NOT NULL DEFAULT 0, 
+ difficulty INT UNSIGNED NOT NULL DEFAULT 0, 
+ hashrate INT UNSIGNED NOT NULL DEFAULT 0, 
+ transactionPoolSize INT UNSIGNED NOT NULL DEFAULT 0, 
+ PRIMARY KEY (`id`, `utcTimestamp`), 
+ KEY `status` (`status`),
+ KEY `feeAmount` (`feeAmount`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPRESSED;
